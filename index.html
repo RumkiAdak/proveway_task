@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bundle & Save</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #d4fc79, #96e6a1); /* Soothing background */
+        }
+
+        .container {
+            border: none;
+            padding: 30px;
+            border-radius: 15px;
+            background: #fff;
+            width: 500px;
+            box-sizing: border-box;
+            text-align: center;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); /* 3D shadow effect */
+        }
+
+        .bundle-option {
+            border: 2px solid #ccc;
+            padding: 15px;
+            margin: 10px auto;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 80%;
+            max-width: 350px;
+            overflow: hidden;
+            box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+            background: #f9f9f9;
+        }
+
+        .bundle-option:hover {
+            background: #f1f1f1;
+        }
+
+        .bundle-option.expanded {
+            width: 90%;
+            max-width: 450px;
+            padding: 20px;
+            border: 2px solid #28a745;
+            background-color: #e3f7d9;
+            box-shadow: 3px 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .bundle-option label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .bundle-option .price {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .bundle-option .discount {
+            color: green;
+            font-size: 0.9em;
+        }
+
+        .bundle-option .most-popular {
+            background-color: yellow;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .size-color {
+            display: none;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+
+        .expanded .size-color {
+            display: flex;
+        }
+
+        .size-color select {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .total-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid #ccc;
+            font-size: 1.2em;
+        }
+
+        .total-amount {
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .shipping-info {
+            margin-top: 5px;
+            font-size: 1em;
+            color: #ff5733;
+            font-weight: bold;
+            display: none; /* Initially hidden */
+        }
+
+        .add-to-cart {
+            background-color: #28a745;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            width: 100%;
+            margin-top: 20px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .add-to-cart:hover {
+            background-color: #218838;
+            box-shadow: 4px 8px 12px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Bundle & Save</h2>
+
+    <div class="bundle-option" data-price="195">
+        <label>
+            <input type="radio" name="bundle">
+            1 Pair <span class="price">₹195.00</span>
+            <span class="discount">50% OFF</span>
+        </label>
+        <div class="size-color">
+            <select>
+                <option>Size</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+            </select>
+            <select>
+                <option>Colour</option>
+                <option>Red</option>
+                <option>Blue</option>
+                <option>Green</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="bundle-option" data-price="345">
+        <label>
+            <input type="radio" name="bundle">
+            2 Pairs <span class="price">₹345.00</span>
+            <span class="most-popular">Most Popular</span>
+            <span class="discount">40% OFF</span>
+        </label>
+        <div class="size-color">
+            <select>
+                <option>Size</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+            </select>
+            <select>
+                <option>Colour</option>
+                <option>Red</option>
+                <option>Blue</option>
+                <option>Green</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="bundle-option" data-price="528">
+        <label>
+            <input type="radio" name="bundle">
+            3 Pairs <span class="price">₹528.00</span>
+            <span class="discount">60% OFF</span>
+        </label>
+        <div class="size-color">
+            <select>
+                <option>Size</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+            </select>
+            <select>
+                <option>Colour</option>
+                <option>Red</option>
+                <option>Blue</option>
+                <option>Green</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="total-section">
+        <span>Total Price:</span>
+        <span id="total-price" class="total-amount">₹0.00</span>
+    </div>
+
+    <div id="shipping-info" class="shipping-info">🚚 Free 2 Day Shipping</div>
+
+    <button class="add-to-cart">+ Add to Cart</button>
+</div>
+
+<script>
+    const bundleOptions = document.querySelectorAll('.bundle-option');
+    const totalPriceElement = document.getElementById('total-price');
+    const shippingInfo = document.getElementById('shipping-info');
+
+    bundleOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            bundleOptions.forEach(opt => opt.classList.remove('expanded'));
+            option.classList.add('expanded');
+            const price = parseFloat(option.dataset.price);
+            totalPriceElement.textContent = `₹${price.toFixed(2)}`;
+            shippingInfo.style.display = 'block'; // Show free shipping text
+            option.querySelector('input[type="radio"]').checked = true;
+        });
+    });
+</script>
+
+</body>
+</html>
